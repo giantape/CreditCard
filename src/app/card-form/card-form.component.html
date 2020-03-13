@@ -1,11 +1,32 @@
-<form [formGroup]="cardForm" (ngSubmit)="onSubmit()">
-    <app-input label="Name" [control]="cardForm.get('cardName')"></app-input>
-    <app-input label="Card Number" [control]="cardForm.get('cardNumber')"></app-input>
-    <app-input label="Expiration (MM/YY)" [control]="cardForm.get('cardExpiration')"></app-input>
-    <app-input label="Security Code" [control]="cardForm.get('cardSecurityCode')"></app-input>
-    <button class="button is-primary" [disabled]="cardForm.invalid" type="submit">Submit</button>
-</form>
-
+<div class="columns">
+    <div class="column">
+        <app-card 
+            [name]="cardForm.get('cardName').value"
+            [cardNumber]="cardForm.get('cardNumber').value"
+            [expiration]="cardForm.get('cardExpiration').value">
+        </app-card>
+    </div>
+    <div class="column">
+        <form [formGroup]="cardForm" (ngSubmit)="onSubmit()">
+            <app-input label="Name" [control]="cardForm.get('cardName')"></app-input>
+            <app-input label="Card Number" [control]="cardForm.get('cardNumber')"></app-input>
+            <div class="columns">
+                <div class="column">
+                    <app-input label="Expiration (MM/YY)" [control]="cardForm.get('cardExpiration')"></app-input>
+                </div>
+                <div class="column">
+                    <app-input label="Security Code" [control]="cardForm.get('cardSecurityCode')"></app-input>
+                </div>
+            </div>
+            <div class="buttons">
+                <button class="button is-primary" [disabled]="cardForm.invalid" type="submit">Submit</button>
+                <button class="button is-warning" type="reset" (click)="onResetButton()">Reset</button> 
+            </div>
+            
+        </form>
+    </div>
+</div>
+<!-- 
 <div>Form Contents: {{ cardForm.value | json }}</div>
 <div>Form is valid: {{ cardForm.valid }}</div>
-<div>Error around name: {{ cardForm.controls.cardName.errors | json }}</div>
+<div>Error around name: {{ cardForm.controls.cardName.errors | json }}</div> -->
